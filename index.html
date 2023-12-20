@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Whatsapp Number</title>
+  </head>
+  <body>
+    <div>
+      <h1>Whatsapp Number</h1>
+      <input type="text" id="number" placeholder="Enter Number" />
+      <select id="country">
+        <option value="597">Suriname</option>
+        <option value="1">USA</option>
+        <option value="53">Cuba</option>
+      </select>
+      <button id="go">Go</button>
+    </div>
+    <script>
+      document.getElementById("go").addEventListener("click", function() {
+        var country = document.getElementById("country").value;
+        var number = document.getElementById("number").value;
+        var url = "https://wa.me/+" + country + number;
+        window.open(url);
+      });
+    </script>
+  </body>
+</html>
