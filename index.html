@@ -1,10 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Whatsapp Number">
     <title>Whatsapp Number</title>
     <style>
     body {
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       font-size: 16px;
     }
     .container {
@@ -16,7 +20,8 @@
       flex-direction: column;
       gap: 10px;
     }
-    input {
+
+    input, select, button {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -24,22 +29,15 @@
       border-radius: 5px;
       font-size: 16px;
     }
-    select {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
-    }
+
     button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 16px;
       cursor: pointer;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
     }
     </style>
   </head>
