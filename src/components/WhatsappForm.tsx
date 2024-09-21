@@ -17,11 +17,19 @@ const prefix = [{
 export default function WhatsappForm() {
   const [selectedCountry, setSelectedCountry] = useState(prefix[0]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const phone = e.target["phone-number"].value;
+    const formData = new FormData(e.currentTarget);
+    const rawPhone = formData.get('phone-number') as string;
+
+    const phone = rawPhone.replace(/[^0-9]/g, '').replace('+', '').replace(selectedCountry.number, '').trim();
+
     const url = `https://wa.me/${selectedCountry.number}${phone}`;
     window.location.href = url;
+  }
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCountry(prefix.find((item) => item.number === e.target.value) || prefix[0]);
   }
 
   return (
@@ -34,7 +42,7 @@ export default function WhatsappForm() {
             id="location"
             name="location"
             className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary/60 sm:text-sm sm:leading-6"
-            onChange={(e) => setSelectedCountry(prefix.find((item) => item.number === e.target.value))}
+            onChange={handleCountryChange}
             value={selectedCountry.number}
           >
             {prefix.map((item) => (
