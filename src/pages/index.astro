@@ -1,6 +1,6 @@
 ---
 import GitHub from '../components/GitHub.astro'
-import WhatsappForm from '../components/WhatsappForm.astro'
+import WhatsappForm from '../components/WhatsappForm.tsx'
 ---
 
 <html lang="en">
@@ -15,7 +15,7 @@ import WhatsappForm from '../components/WhatsappForm.astro'
     <GitHub />
     <main class="container">
       <section class="w-screen h-screen flex justify-center items-center">
-        <WhatsappForm />
+        <WhatsappForm client:load />
       </section>
     </main>
 	</body>
