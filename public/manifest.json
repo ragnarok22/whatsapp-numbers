@@ -1,6 +1,7 @@
 {
   "short_name": "Whatsapp Redirect",
   "name": "Whatsapp Redirect",
+  "description": "Open Whatsapp with any number without saving it to your contacts",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -11,6 +12,20 @@
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot01.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot02.png",
+      "sizes": "720x540",
+      "type": "image/png",
+      "form_factor": "wide"
     }
   ],
   "start_url": "/",
