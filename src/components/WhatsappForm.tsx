@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const prefix = [{
   number: "597",
@@ -16,21 +16,22 @@ const prefix = [{
 
 export default function WhatsappForm() {
   const [selectedCountry, setSelectedCountry] = useState(prefix[0]);
-  const [phone, setPhone] = useState('');
+  const [rawPhone, setRawPhone] = useState('');
 
   const parsePhoneNumber = (rawPhone: string) => {
     return rawPhone.replace(/[^0-9]/g, '').replace('+', '').replace(selectedCountry.number, '').trim();
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const rawPhone = formData.get('phone-number') as string;
-
-    const phone = parsePhoneNumber(rawPhone);
-
+  const redirectToWatsapp = (phone: string) => {
     const url = `https://wa.me/${selectedCountry.number}${phone}`;
     window.location.href = url;
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const phone = parsePhoneNumber(rawPhone);
+
+    redirectToWatsapp(phone);
   }
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -38,6 +39,12 @@ export default function WhatsappForm() {
   }
 
   const handleShare = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (rawPhone === '') {
+      alert('Please enter a phone number');
+      return
+    }
+    const phone = parsePhoneNumber(rawPhone);
+
     // retrieves the URL of the current page
     const url = `${window.location.href}?phone=${encodeURIComponent(phone)}`
 
@@ -50,6 +57,16 @@ export default function WhatsappForm() {
     // copy to clipboard
     await navigator.clipboard.writeText(url);
   }
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    const rawPhone = query.get('phone');
+
+    if (rawPhone) {
+      const phone = parsePhoneNumber(rawPhone);
+      redirectToWatsapp(phone);
+    }
+  }, [])
 
   return (
     <div className="w-10/12 md:w-[400px]">
@@ -83,8 +100,8 @@ export default function WhatsappForm() {
               autoComplete="tel"
               className="flex-1 block w-full rounded-none rounded-r-md border-0 py-1.5 pl-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary/60 sm:text-sm sm:leading-6"
               placeholder="Phone number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={rawPhone}
+              onChange={(e) => setRawPhone(e.target.value)}
             />
           </div>
         </div>
