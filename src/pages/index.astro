@@ -4,10 +4,10 @@ import WhatsappForm from '../components/WhatsappForm.tsx'
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -37,14 +37,14 @@ import WhatsappForm from '../components/WhatsappForm.tsx'
     <meta property="twitter:image" content="https://whatsapp.ragnarok22.dev/og-twitter.png" />
 
 
-		<title>WhatsApp Redirect</title>
-	</head>
-	<body class="">
+    <title>WhatsApp Redirect</title>
+  </head>
+  <body class="">
     <GitHub />
     <main class="container">
       <section class="w-screen h-screen flex justify-center items-center">
-        <WhatsappForm client:load />
+	<WhatsappForm client:load />
       </section>
     </main>
-	</body>
+  </body>
 </html>
