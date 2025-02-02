@@ -16,13 +16,18 @@ const prefix = [{
 
 export default function WhatsappForm() {
   const [selectedCountry, setSelectedCountry] = useState(prefix[0]);
+  const [phone, setPhone] = useState('');
+
+  const parsePhoneNumber = (rawPhone: string) => {
+    return rawPhone.replace(/[^0-9]/g, '').replace('+', '').replace(selectedCountry.number, '').trim();
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const rawPhone = formData.get('phone-number') as string;
 
-    const phone = rawPhone.replace(/[^0-9]/g, '').replace('+', '').replace(selectedCountry.number, '').trim();
+    const phone = parsePhoneNumber(rawPhone);
 
     const url = `https://wa.me/${selectedCountry.number}${phone}`;
     window.location.href = url;
@@ -30,6 +35,20 @@ export default function WhatsappForm() {
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCountry(prefix.find((item) => item.number === e.target.value) || prefix[0]);
+  }
+
+  const handleShare = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    // retrieves the URL of the current page
+    const url = `${window.location.href}?phone=${encodeURIComponent(phone)}`
+
+    const result = navigator.canShare({ url })
+    if (result) {
+      await navigator.share({ url })
+      return
+    }
+
+    // copy to clipboard
+    await navigator.clipboard.writeText(url);
   }
 
   return (
@@ -63,11 +82,17 @@ export default function WhatsappForm() {
               id="phone-number"
               autoComplete="tel"
               className="flex-1 block w-full rounded-none rounded-r-md border-0 py-1.5 pl-1 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary/60 sm:text-sm sm:leading-6"
+              placeholder="Phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
         </div>
-        <div className="flex justify-end">
-          <button type="submit" className="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60">Go</button>
+        <div className="flex gap-4">
+          <button type="button" className="w-2/3 rounded-md bg-slate-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60" onClick={handleShare}>
+            Share
+          </button>
+          <button type="submit" className="w-full rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60">Go</button>
         </div>
       </form>
     </div>
