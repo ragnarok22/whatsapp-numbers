@@ -1,6 +1,6 @@
 ---
-import GitHub from '../components/GitHub.astro'
-import WhatsappForm from '../components/WhatsappForm.tsx'
+import GitHub from "../components/GitHub.astro";
+import WhatsappForm from "../components/WhatsappForm.tsx";
 ---
 
 <html lang="en">
@@ -8,34 +8,48 @@ import WhatsappForm from '../components/WhatsappForm.tsx'
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="icon" type="image/icon" href="/favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="title" content="Whatsapp Redirect">
-    <meta name="description" content="Open Whatsapp with any number without saving it to your contacts">
-    <meta name="keywords" content="whatsapp,no contacts,whatsapp redirect">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="English">
-    <meta name="author" content="Reinier Hernández Avila">
+    <meta name="title" content="Whatsapp Redirect" />
+    <meta
+      name="description"
+      content="Open Whatsapp with any number without saving it to your contacts"
+    />
+    <meta name="keywords" content="whatsapp,no contacts,whatsapp redirect" />
+    <meta name="robots" content="index, follow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="language" content="English" />
+    <meta name="author" content="Reinier Hernández Avila" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://whatsapp.ragnarok22.dev/" />
     <meta property="og:title" content="Whatsapp Redirect" />
-    <meta property="og:description" content="Open Whatsapp with any number without saving it to your contacts" />
-    <meta property="og:image" content="https://whatsapp.ragnarok22.dev/og.png" />
+    <meta
+      property="og:description"
+      content="Open Whatsapp with any number without saving it to your contacts"
+    />
+    <meta
+      property="og:image"
+      content="https://whatsapp.ragnarok22.dev/og.png"
+    />
     <meta property="og:site_name" content="Whatsapp Redirect" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://whatsapp.ragnarok22.dev/" />
     <meta property="twitter:title" content="Whatsapp Redirect" />
-    <meta property="twitter:description" content="Open Whatsapp with any number without saving it to your contacts" />
-    <meta property="twitter:image" content="https://whatsapp.ragnarok22.dev/og-twitter.png" />
-
+    <meta
+      property="twitter:description"
+      content="Open Whatsapp with any number without saving it to your contacts"
+    />
+    <meta
+      property="twitter:image"
+      content="https://whatsapp.ragnarok22.dev/og-twitter.png"
+    />
 
     <title>WhatsApp Redirect</title>
   </head>
@@ -43,7 +57,7 @@ import WhatsappForm from '../components/WhatsappForm.tsx'
     <GitHub />
     <main class="container">
       <section class="w-screen h-screen flex justify-center items-center">
-	<WhatsappForm client:load />
+        <WhatsappForm client:load />
       </section>
     </main>
   </body>

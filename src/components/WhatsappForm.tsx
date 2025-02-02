@@ -1,79 +1,101 @@
 import { useEffect, useState } from "react";
 
-const prefix = [{
-  number: "597",
-  country: "Suriname"
-}, {
-  number: "1",
-  country: "USA"
-}, {
-  number: "53",
-  country: "Cuba"
-}, {
-  number: "549",
-  country: "Argentina"
-}];
+const prefix = [
+  {
+    number: "597",
+    country: "Suriname",
+  },
+  {
+    number: "1",
+    country: "USA",
+  },
+  {
+    number: "53",
+    country: "Cuba",
+  },
+  {
+    number: "549",
+    country: "Argentina",
+  },
+];
 
 export default function WhatsappForm() {
   const [selectedCountry, setSelectedCountry] = useState(prefix[0]);
-  const [rawPhone, setRawPhone] = useState('');
+  const [rawPhone, setRawPhone] = useState("");
 
   const parsePhoneNumber = (rawPhone: string) => {
-    return rawPhone.replace(/[^0-9]/g, '').replace('+', '').replace(selectedCountry.number, '').trim();
-  }
+    return rawPhone
+      .replace(/[^0-9]/g, "")
+      .replace("+", "")
+      .replace(selectedCountry.number, "")
+      .trim();
+  };
 
   const redirectToWatsapp = (phone: string) => {
     const url = `https://wa.me/${selectedCountry.number}${phone}`;
     window.location.href = url;
-  }
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const phone = parsePhoneNumber(rawPhone);
 
     redirectToWatsapp(phone);
-  }
+  };
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCountry(prefix.find((item) => item.number === e.target.value) || prefix[0]);
-  }
+    setSelectedCountry(
+      prefix.find((item) => item.number === e.target.value) || prefix[0],
+    );
+  };
 
   const handleShare = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (rawPhone === '') {
-      alert('Please enter a phone number');
-      return
+    if (rawPhone === "") {
+      alert("Please enter a phone number");
+      return;
     }
     const phone = parsePhoneNumber(rawPhone);
 
     // retrieves the URL of the current page
-    const url = `${window.location.href}?phone=${encodeURIComponent(phone)}`
+    const url = `${window.location.href}?phone=${encodeURIComponent(phone)}`;
 
-    const result = navigator.canShare({ url })
+    const result = navigator.canShare({ url });
     if (result) {
-      await navigator.share({ url })
-      return
+      await navigator.share({ url });
+      return;
     }
 
     // copy to clipboard
     await navigator.clipboard.writeText(url);
-  }
+  };
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
-    const rawPhone = query.get('phone');
+    const rawPhone = query.get("phone");
 
     if (rawPhone) {
       const phone = parsePhoneNumber(rawPhone);
       redirectToWatsapp(phone);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="w-10/12 md:w-[400px]">
-      <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Whatsapp Redirect</h2>
-      <form className="flex flex-col gap-4" action="post" onSubmit={handleSubmit}>
+      <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
+        Whatsapp Redirect
+      </h2>
+      <form
+        className="flex flex-col gap-4"
+        action="post"
+        onSubmit={handleSubmit}
+      >
         <div>
-          <label htmlFor="location" className="block text-sm font-medium leading-6 text-gray-900">Location</label>
+          <label
+            htmlFor="location"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Location
+          </label>
           <select
             id="location"
             name="location"
@@ -82,13 +104,20 @@ export default function WhatsappForm() {
             value={selectedCountry.number}
           >
             {prefix.map((item) => (
-              <option value={item.number} key={item.number}>{item.country}</option>
+              <option value={item.number} key={item.number}>
+                {item.country}
+              </option>
             ))}
           </select>
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">Phone number</label>
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Phone number
+          </label>
           <div className="mt-2 flex">
             <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
               +{selectedCountry.number}
@@ -106,12 +135,21 @@ export default function WhatsappForm() {
           </div>
         </div>
         <div className="flex gap-4">
-          <button type="button" className="w-2/3 rounded-md bg-slate-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60" onClick={handleShare}>
+          <button
+            type="button"
+            className="w-2/3 rounded-md bg-slate-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60"
+            onClick={handleShare}
+          >
             Share
           </button>
-          <button type="submit" className="w-full rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60">Go</button>
+          <button
+            type="submit"
+            className="w-full rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60"
+          >
+            Go
+          </button>
         </div>
       </form>
     </div>
-  )
+  );
 }
