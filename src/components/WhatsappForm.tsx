@@ -26,8 +26,7 @@ export default function WhatsappForm() {
   const parsePhoneNumber = (rawPhone: string) => {
     return rawPhone
       .replace(/[^0-9]/g, "")
-      .replace("+", "")
-      .replace(selectedCountry.number, "")
+      .replace(`+${selectedCountry.number}`, "")
       .trim();
   };
 
