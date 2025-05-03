@@ -2,6 +2,10 @@
   "name": "whatsapp-numbers",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
