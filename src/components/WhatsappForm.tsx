@@ -24,18 +24,21 @@ const prefix: CountryPrefix[] = [
   },
 ];
 
+export function parsePhoneNumber(rawPhone: string, countryCode: string) {
+  const digits = rawPhone.replace(/[^0-9]/g, "");
+  return digits.startsWith(countryCode)
+    ? digits.slice(countryCode.length)
+    : digits;
+}
+
 export default function WhatsappForm() {
   const [selectedCountry, setSelectedCountry] = useState<CountryPrefix>(
     prefix[0],
   );
   const [rawPhone, setRawPhone] = useState("");
 
-  const parsePhoneNumber = (rawPhone: string) => {
-    return rawPhone
-      .replace(/[^0-9]/g, "")
-      .replace(`+${selectedCountry.number}`, "")
-      .trim();
-  };
+  const parseSelectedPhone = (rawPhone: string) =>
+    parsePhoneNumber(rawPhone, selectedCountry.number);
 
   const redirectToWhatsapp = (phone: string) => {
     const url = `https://wa.me/${selectedCountry.number}${phone}`;
@@ -44,7 +47,7 @@ export default function WhatsappForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const phone = parsePhoneNumber(rawPhone);
+    const phone = parseSelectedPhone(rawPhone);
 
     redirectToWhatsapp(phone);
   };
@@ -60,7 +63,7 @@ export default function WhatsappForm() {
       alert("Please enter a phone number");
       return;
     }
-    const phone = parsePhoneNumber(rawPhone);
+    const phone = parseSelectedPhone(rawPhone);
 
     // retrieves the URL of the current page
     const url = `${window.location.href}?phone=${encodeURIComponent(phone)}`;
@@ -80,7 +83,7 @@ export default function WhatsappForm() {
     const rawPhone = query.get("phone");
 
     if (rawPhone) {
-      const phone = parsePhoneNumber(rawPhone);
+      const phone = parseSelectedPhone(rawPhone);
       redirectToWhatsapp(phone);
     }
   }, []);
