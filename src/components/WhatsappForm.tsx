@@ -122,7 +122,7 @@ export default function WhatsappForm() {
               +{selectedCountry.number}
             </span>
             <input
-              type="number"
+              type="tel"
               name="phone-number"
               id="phone-number"
               autoComplete="tel"
