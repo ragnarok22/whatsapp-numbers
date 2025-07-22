@@ -1,47 +1,24 @@
-# Astro Starter Kit: Minimal
+# WhatsApp Redirect
 
-```sh
-npm create astro@latest -- --template minimal
+A minimal web app that helps you open a WhatsApp chat with any phone number without adding it to your contacts. Built with [Astro](https://astro.build/), React and Tailwind CSS.
+
+## Purpose
+
+Many times you need to send a quick message to a number that is not in your contacts. WhatsApp Redirect lets you select a country prefix, type the phone number and immediately open `https://wa.me/` with that number. The generated link can also be shared so other users open the same chat.
+
+## Running locally
+
+```bash
+pnpm install   # or npm install
+pnpm run dev   # start development server at http://localhost:4321
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Other useful scripts:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- `pnpm run build` – build the site to `dist/`.
+- `pnpm run preview` – serve the production build locally.
 
-## 🚀 Project Structure
+## How it works
 
-Inside of your Astro project, you'll see the following folders and files:
+The home page renders a small React form. After choosing a country and entering the number, submitting the form redirects your browser to WhatsApp using `https://wa.me/{prefix}{number}`. If you append a `?phone=<number>` query parameter to the page URL, the site automatically redirects to WhatsApp on load. A Share button can generate and share this link using the Web Share API or copy it to the clipboard.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
