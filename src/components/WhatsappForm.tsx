@@ -30,7 +30,7 @@ export default function WhatsappForm() {
       .trim();
   };
 
-  const redirectToWatsapp = (phone: string) => {
+  const redirectToWhatsapp = (phone: string) => {
     const url = `https://wa.me/${selectedCountry.number}${phone}`;
     window.location.href = url;
   };
@@ -39,7 +39,7 @@ export default function WhatsappForm() {
     e.preventDefault();
     const phone = parsePhoneNumber(rawPhone);
 
-    redirectToWatsapp(phone);
+    redirectToWhatsapp(phone);
   };
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -74,7 +74,7 @@ export default function WhatsappForm() {
 
     if (rawPhone) {
       const phone = parsePhoneNumber(rawPhone);
-      redirectToWatsapp(phone);
+      redirectToWhatsapp(phone);
     }
   }, []);
 
