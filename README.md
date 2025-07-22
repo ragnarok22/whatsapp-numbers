@@ -1,6 +1,5 @@
 # WhatsApp Redirect
-
-[![CI](https://github.com/owner/whatsapp-numbers/actions/workflows/test.yml/badge.svg)](https://github.com/owner/whatsapp-numbers/actions/workflows/test.yml)
+[![CI](https://github.com/ragnarok22/whatsapp-numbers/actions/workflows/test.yml/badge.svg)](https://github.com/ragnarok22/whatsapp-numbers/actions/workflows/test.yml)
 
 A minimal web app that helps you open a WhatsApp chat with any phone number without adding it to your contacts. Built with [Astro](https://astro.build/), React and Tailwind CSS.
 
