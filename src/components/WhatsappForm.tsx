@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-const prefix = [
+interface CountryPrefix {
+  number: string;
+  country: string;
+}
+
+const prefix: CountryPrefix[] = [
   {
     number: "597",
     country: "Suriname",
@@ -20,7 +25,9 @@ const prefix = [
 ];
 
 export default function WhatsappForm() {
-  const [selectedCountry, setSelectedCountry] = useState(prefix[0]);
+  const [selectedCountry, setSelectedCountry] = useState<CountryPrefix>(
+    prefix[0],
+  );
   const [rawPhone, setRawPhone] = useState("");
 
   const parsePhoneNumber = (rawPhone: string) => {
