@@ -17,8 +17,8 @@ Other useful scripts:
 
 - `pnpm run build` – build the site to `dist/`.
 - `pnpm run preview` – serve the production build locally.
+- `pnpm run format` – format all files with Prettier.
 
 ## How it works
 
 The home page renders a small React form. After choosing a country and entering the number, submitting the form redirects your browser to WhatsApp using `https://wa.me/{prefix}{number}`. If you append a `?phone=<number>` query parameter to the page URL, the site automatically redirects to WhatsApp on load. A Share button can generate and share this link using the Web Share API or copy it to the clipboard.
-
