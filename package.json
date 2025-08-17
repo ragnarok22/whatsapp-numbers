@@ -12,7 +12,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write .",
+    "prettier": "prettier --write .",
     "test": "vitest run"
   },
   "dependencies": {
