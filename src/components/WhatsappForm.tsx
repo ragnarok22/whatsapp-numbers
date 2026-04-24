@@ -22,6 +22,10 @@ const prefix: CountryPrefix[] = [
     number: "549",
     country: "Argentina",
   },
+  {
+    number: "380",
+    country: "Ukraine",
+  },
 ];
 
 export function parsePhoneNumber(rawPhone: string, countryCode: string) {
