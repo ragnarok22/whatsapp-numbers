@@ -4,7 +4,8 @@ import astro from "eslint-plugin-astro";
 import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 
-export default tseslint.config(
+/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigFile} */
+export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
   ...astro.configs.recommended,
@@ -19,4 +20,4 @@ export default tseslint.config(
   {
     ignores: ["dist/", ".astro/", "node_modules/", "src/env.d.ts"],
   },
-);
+];

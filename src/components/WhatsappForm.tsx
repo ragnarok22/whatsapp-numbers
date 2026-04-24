@@ -49,7 +49,7 @@ export default function WhatsappForm() {
     window.location.href = url;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const phone = parseSelectedPhone(rawPhone);
 
