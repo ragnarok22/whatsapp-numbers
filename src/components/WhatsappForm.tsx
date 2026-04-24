@@ -62,7 +62,7 @@ export default function WhatsappForm() {
     );
   };
 
-  const handleShare = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleShare = async () => {
     if (rawPhone === "") {
       alert("Please enter a phone number");
       return;
@@ -84,11 +84,11 @@ export default function WhatsappForm() {
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
-    const rawPhone = query.get("phone");
+    const phone = query.get("phone");
 
-    if (rawPhone) {
-      const phone = parseSelectedPhone(rawPhone);
-      redirectToWhatsapp(phone);
+    if (phone) {
+      const parsed = parsePhoneNumber(phone, prefix[0].number);
+      window.location.href = `https://wa.me/${prefix[0].number}${parsed}`;
     }
   }, []);
 

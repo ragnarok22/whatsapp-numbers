@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import astro from "eslint-plugin-astro";
 import reactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
 
 export default tseslint.config(
   js.configs.recommended,
@@ -12,6 +13,10 @@ export default tseslint.config(
     rules: reactHooks.configs.recommended.rules,
   },
   {
-    ignores: ["dist/", ".astro/", "node_modules/"],
+    files: ["public/sw.js"],
+    languageOptions: { globals: globals.serviceworker },
+  },
+  {
+    ignores: ["dist/", ".astro/", "node_modules/", "src/env.d.ts"],
   },
 );
